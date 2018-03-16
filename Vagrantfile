@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
   # In our case, using VirtualBox:
   config.vm.provider "virtualbox" do |vb|  #
     # Customize the amount of memory on the VM:
-    vb.memory = "8192"
+    vb.memory = "3584"
   end
 
   # Provision the docker container that runs the OpenCPU server with breakdown
@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
     images: ["opencpu/rstudio"]
   
   config.vm.provision "docker" do |d|
-    d.run "opencpu/rstudio", args: "-t -p 8004:8004"
+	  d.run "opencpu/rstudio", args: "-t -p 8004:8004"
   end
   
   # Enable provisioning with a shell script. Additional provisioners such as
