@@ -17,6 +17,7 @@
 	
 	<link href="jquery-editable-1.5.1/jquery-editable/css/jquery-editable.css" rel="stylesheet"/>
 	<script src="jquery-editable-1.5.1/jquery-editable/js/jquery-editable-poshytip.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	
 	<style>
 	.highconcern {color:red}
@@ -252,6 +253,27 @@
 			</ul>
 			
 		</div>
+
+		<div title="Display" style="padding:20px">
+			<h2>Display</h2>
+			<select id='x_selection'>
+				<option value="ground_water_capex">Ground Water Capex</option>
+				<option value="surface_water_capex">Surface Water Capex</option>
+				<option value="transfer_capex">Transfer Capex</option>
+				<option value="reservoir_opex">Reservoir Opex</option>
+			</select> 
+			<select id='y_selection'>
+				<option value="transfer_capex">Transfer Capex</option>
+				<option value="reservoir_opex">Reservoir Opex</option>
+				<option value="ground_water_capex">Ground Water Capex</option>
+			</select> 
+			<select id='z_selection'>
+				<option value="cumulative_costs">Cumulative Costs</option>
+				<option value="total_transfers">Total Transfers</option>
+			</select> 
+			<input type="button" value="Plot" onClick="renderPlot();">
+			<div id="myDiv" style="width:100%;height:100%"></div>
+		</div>
 	
 		<div title="Equation Breakdown"><div class="easyui-layout" data-options="fit:true">
 			<div data-options="region:'north'" style="height:35px;padding:5px;border:false;collapsible:false">
@@ -369,6 +391,7 @@
 	<script type="text/javascript" src="bivariate.js"></script>
 	<script type="text/javascript" src="multivariate.js"></script>
 	<script type="text/javascript" src="treemodel.js"></script>
+	<script type="text/javascript" src="display.js"></script>
 	<script type="text/javascript">
 		var analysis = new Analysis();
 		var dgEquations = new DGEquations({ model: analysis, el: $("#dg-equations") });
@@ -396,6 +419,7 @@
 		var multCheck = new MultivarCheckboxTable({model:mult,el:$("#mult_table"),template:$("#MultiVarRB_template")});
 		//ocpu.seturl("/breakdown/R")
 		//ocpu.seturl("http://josephguillaume.ocpu.io/breakdown/R")
+		ocpu.seturl("http://localhost:8004/ocpu/library/breakdown/R")
 		var multOut= new MultivarResultsTable({model:mult,univariate:univ,el:$("#mult_output"),template:$("#MultiVarResultsTable_template")});
 		
 		var treeView = new TreeView({
